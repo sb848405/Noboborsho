@@ -35,6 +35,14 @@
             background: #ef4444; 
         }
 
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
         #custom-cursor {
             position: fixed;
             top: 0;
@@ -152,6 +160,20 @@
 </head>
 <body class="relative w-full">
 
+    <audio id="bg-music" loop autoplay>
+        <source src="Aud.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="music-toggle" class="fixed top-6 right-6 z-[99999] w-12 h-12 bg-red-50/80 backdrop-blur-md border border-red-200 rounded-full flex items-center justify-center text-red-700 hover:bg-red-100 transition-all cursor-none custom-btn shadow-lg">
+        <svg id="music-icon-on" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+        </svg>
+        <svg id="music-icon-off" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path>
+        </svg>
+    </button>
+
     <div id="custom-cursor" class="hidden md:block"></div>
     <div id="cursor-trail" class="hidden md:block"></div>
 
@@ -241,7 +263,7 @@
     </section>
 
     <section id="section-2" class="relative z-10 w-full min-h-screen flex items-center justify-center py-24 px-6">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between w-full gap-12">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row-reverse items-center justify-between w-full gap-12">
             <div class="w-full md:w-1/2 flex justify-center parallax" data-speed="0.05">
                 <svg class="w-64 h-64 md:w-96 md:h-96 drop-shadow-2xl reveal-scale" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="50" cy="60" r="45" fill="#fdfbf7" opacity="0.6" filter="blur(4px)" />
@@ -267,7 +289,7 @@
                     <circle cx="55" cy="80" r="1.8" fill="#fdfbf7"/>
                 </svg>
             </div>
-            <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left reveal-up glass-card">
+            <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left reveal-left glass-card">
                 <div class="glass-content">
                     <h2 class="text-4xl md:text-6xl font-bold mb-6 text-red-800">To My Dearest,</h2>
                     <div class="space-y-6 text-xl md:text-2xl font-light text-red-900/80 leading-relaxed">
@@ -280,9 +302,9 @@
     </section>
 
     <section id="section-3" class="relative z-10 w-full min-h-screen flex items-center justify-center py-24 px-6">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row-reverse items-center justify-between w-full gap-12">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between w-full gap-12">
             <div class="w-full md:w-1/2 flex justify-center parallax" data-speed="-0.04">
-                <svg class="w-72 h-72 md:w-[450px] md:h-[450px] drop-shadow-2xl reveal-right" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-72 h-72 md:w-[450px] md:h-[450px] drop-shadow-2xl reveal-scale" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="potGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                             <stop offset="0%" stop-color="#732b1d" /><stop offset="20%" stop-color="#9c422c" /><stop offset="50%" stop-color="#b8533a" /><stop offset="85%" stop-color="#8a3723" /><stop offset="100%" stop-color="#4a180e" />
@@ -342,7 +364,7 @@
                     </g>
                 </svg>
             </div>
-            <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left reveal-left glass-card">
+            <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left reveal-right glass-card">
                 <div class="glass-content">
                     <p class="script-font text-5xl md:text-7xl text-red-600 mb-6">Sweet & Soothing</p>
                     <div class="space-y-6 text-xl md:text-2xl font-light text-red-900/80 leading-relaxed">
@@ -354,12 +376,12 @@
     </section>
 
     <section id="section-4" class="relative z-10 w-full min-h-screen flex items-center justify-center py-24 px-6">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between w-full gap-12">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row-reverse items-center justify-between w-full gap-12">
             <div class="w-full md:w-1/2 flex justify-center relative parallax" data-speed="0.06">
                 <div class="absolute inset-0 bg-red-200 blur-3xl opacity-40 rounded-full scale-110"></div>
                 
                 <div class="relative w-64 h-80 md:w-80 md:h-[400px] rounded-t-full rounded-b-2xl border-8 border-white shadow-2xl overflow-hidden transform -rotate-3 hover:rotate-2 transition-transform duration-700 z-10 reveal-scale">
-                    <img src="https://images.unsplash.com/photo-1583391733958-69150041a967?auto=format&fit=crop&w=800&q=80" alt="Her Photo" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x800/7f1d1d/fdfbf7?text=Add+Her+Photo+Here'">
+                    <img src="Model1.png" alt="Her Photo" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x800/7f1d1d/fdfbf7?text=Add+Her+Photo+Here'">
                 </div>
 
                 <svg class="absolute -bottom-6 -right-2 md:-right-6 w-24 h-24 text-red-600 drop-shadow-xl z-20 reveal-up" viewBox="0 0 100 100" fill="currentColor" style="transition-delay: 0.3s;">
@@ -368,7 +390,7 @@
                     <path d="M50 80 C 30 60 30 20 50 10 C 70 20 70 60 50 80"/>
                 </svg>
             </div>
-            <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left reveal-right glass-card">
+            <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left reveal-left glass-card">
                 <div class="glass-content">
                     <p class="script-font text-5xl md:text-7xl text-red-600 mb-6">A Vision in Red</p>
                     <div class="space-y-6 text-xl md:text-2xl font-light text-red-900/80 leading-relaxed">
@@ -380,20 +402,111 @@
     </section>
 
     <section id="section-5" class="relative z-10 w-full min-h-screen flex items-center justify-center py-24 px-6">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row-reverse items-center justify-between w-full gap-12">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between w-full gap-12">
             <div class="w-full md:w-1/2 flex justify-center parallax" data-speed="-0.05">
-                <svg class="w-64 h-64 md:w-96 md:h-96 reveal-scale drop-shadow-xl" viewBox="0 0 200 200">
-                    <line x1="50" y1="180" x2="50" y2="40" stroke="#333" stroke-width="6"/>
-                    <rect x="35" y="170" width="30" height="10" fill="#333"/>
-                    <path d="M 30 40 L 70 40 L 60 20 L 40 20 Z" fill="#f59e0b"/>
-                    <circle cx="50" cy="30" r="10" fill="#fef08a" opacity="0.8" filter="blur(2px)"/>
-                    <path d="M 120 150 L 160 150 L 150 180 L 130 180 Z" fill="#92400e"/>
-                    <path d="M 125 150 Q 140 130 155 150" fill="none" stroke="#fdfbf7" stroke-width="4"/>
-                    <path d="M 130 145 Q 140 120 140 145" fill="none" stroke="#d97706" stroke-width="2"/>
-                    <path d="M 140 145 Q 150 120 150 145" fill="none" stroke="#d97706" stroke-width="2"/>
+                <svg class="w-64 h-64 md:w-96 md:h-96 reveal-scale drop-shadow-2xl" viewBox="0 0 200 200">
+                    <rect x="40" y="40" width="120" height="150" fill="#fdfbf7" stroke="#7f1d1d" stroke-width="2"/>
+                    
+                    <rect x="35" y="30" width="130" height="10" fill="#b91c1c" stroke="#7f1d1d" stroke-width="1"/>
+                    
+                    <rect x="40" y="20" width="20" height="10" fill="#b91c1c"/>
+                    <rect x="90" y="20" width="20" height="10" fill="#b91c1c"/>
+                    <rect x="140" y="20" width="20" height="10" fill="#b91c1c"/>
+                    <path d="M 60 30 Q 75 15 90 30" fill="none" stroke="#b91c1c" stroke-width="3"/>
+                    <path d="M 110 30 Q 125 15 140 30" fill="none" stroke="#b91c1c" stroke-width="3"/>
+
+                    <rect x="30" y="190" width="140" height="10" fill="#7f1d1d"/>
+
+                    <path d="M 80 190 L 80 140 A 20 20 0 0 1 120 140 L 120 190 Z" fill="#14532d"/> 
+                    <line x1="100" y1="140" x2="100" y2="190" stroke="#064e3b" stroke-width="2"/> 
+                    <path d="M 80 140 A 20 20 0 0 1 120 140" fill="none" stroke="#fdfbf7" stroke-width="2"/> 
+                    <line x1="80" y1="140" x2="120" y2="140" stroke="#064e3b" stroke-width="2"/>
+                    <circle cx="95" cy="165" r="1.5" fill="#fbbf24"/>
+                    <circle cx="105" cy="165" r="1.5" fill="#fbbf24"/>
+                    
+                    <rect x="50" y="145" width="20" height="35" fill="#14532d"/>
+                    <rect x="130" y="145" width="20" height="35" fill="#14532d"/>
+                    <rect x="48" y="143" width="24" height="4" fill="#b91c1c"/>
+                    <rect x="128" y="143" width="24" height="4" fill="#b91c1c"/>
+                    <line x1="50" y1="150" x2="70" y2="150" stroke="#064e3b" stroke-width="1.5"/>
+                    <line x1="50" y1="155" x2="70" y2="155" stroke="#064e3b" stroke-width="1.5"/>
+                    <line x1="50" y1="160" x2="70" y2="160" stroke="#064e3b" stroke-width="1.5"/>
+                    <line x1="50" y1="165" x2="70" y2="165" stroke="#064e3b" stroke-width="1.5"/>
+                    <line x1="50" y1="170" x2="70" y2="170" stroke="#064e3b" stroke-width="1.5"/>
+                    <line x1="50" y1="175" x2="70" y2="175" stroke="#064e3b" stroke-width="1.5"/>
+                    
+                    <line x1="130" y1="150" x2="150" y2="150" stroke="#064e3b" stroke-width="1.5"/>
+                    <line x1="130" y1="155" x2="150" y2="155" stroke="#064e3b" stroke-width="1.5"/>
+                    <line x1="130" y1="160" x2="150" y2="160" stroke="#064e3b" stroke-width="1.5"/>
+                    <line x1="130" y1="165" x2="150" y2="165" stroke="#064e3b" stroke-width="1.5"/>
+                    <line x1="130" y1="170" x2="150" y2="170" stroke="#064e3b" stroke-width="1.5"/>
+                    <line x1="130" y1="175" x2="150" y2="175" stroke="#064e3b" stroke-width="1.5"/>
+
+                    <rect x="75" y="115" width="50" height="5" fill="#4a0404"/> 
+                    <path d="M 70 110 L 130 110 L 125 115 L 75 115 Z" fill="#b91c1c"/> 
+                    
+                    <rect x="70" y="85" width="60" height="25" fill="none" stroke="#1f2937" stroke-width="2"/>
+                    <line x1="70" y1="85" x2="130" y2="85" stroke="#1f2937" stroke-width="4"/> 
+                    <line x1="75" y1="85" x2="75" y2="110" stroke="#1f2937" stroke-width="1"/>
+                    <line x1="80" y1="85" x2="80" y2="110" stroke="#1f2937" stroke-width="1"/>
+                    <line x1="85" y1="85" x2="85" y2="110" stroke="#1f2937" stroke-width="1"/>
+                    <line x1="90" y1="85" x2="90" y2="110" stroke="#1f2937" stroke-width="1"/>
+                    <line x1="95" y1="85" x2="95" y2="110" stroke="#1f2937" stroke-width="1"/>
+                    <line x1="100" y1="85" x2="100" y2="110" stroke="#1f2937" stroke-width="1"/>
+                    <line x1="105" y1="85" x2="105" y2="110" stroke="#1f2937" stroke-width="1"/>
+                    <line x1="110" y1="85" x2="110" y2="110" stroke="#1f2937" stroke-width="1"/>
+                    <line x1="115" y1="85" x2="115" y2="110" stroke="#1f2937" stroke-width="1"/>
+                    <line x1="120" y1="85" x2="120" y2="110" stroke="#1f2937" stroke-width="1"/>
+                    <line x1="125" y1="85" x2="125" y2="110" stroke="#1f2937" stroke-width="1"/>
+                    <line x1="70" y1="95" x2="130" y2="95" stroke="#1f2937" stroke-width="1"/> 
+
+                    <path d="M 85 110 L 85 65 A 15 15 0 0 1 115 65 L 115 110 Z" fill="#14532d"/>
+                    <line x1="100" y1="65" x2="100" y2="110" stroke="#064e3b" stroke-width="2"/>
+                    <path d="M 85 65 A 15 15 0 0 1 115 65" fill="#fef08a" opacity="0.8"/>
+                    <line x1="85" y1="65" x2="115" y2="65" stroke="#064e3b" stroke-width="2"/>
+                    <line x1="100" y1="65" x2="100" y2="50" stroke="#14532d" stroke-width="1.5"/>
+                    <line x1="100" y1="65" x2="90" y2="54" stroke="#14532d" stroke-width="1.5"/>
+                    <line x1="100" y1="65" x2="110" y2="54" stroke="#14532d" stroke-width="1.5"/>
+
+                    <line x1="85" y1="70" x2="99" y2="70" stroke="#064e3b" stroke-width="1"/>
+                    <line x1="85" y1="75" x2="99" y2="75" stroke="#064e3b" stroke-width="1"/>
+                    <line x1="85" y1="80" x2="99" y2="80" stroke="#064e3b" stroke-width="1"/>
+                    <line x1="85" y1="85" x2="99" y2="85" stroke="#064e3b" stroke-width="1"/>
+                    <line x1="85" y1="90" x2="99" y2="90" stroke="#064e3b" stroke-width="1"/>
+                    <line x1="85" y1="95" x2="99" y2="95" stroke="#064e3b" stroke-width="1"/>
+                    <line x1="85" y1="100" x2="99" y2="100" stroke="#064e3b" stroke-width="1"/>
+
+                    <line x1="101" y1="70" x2="115" y2="70" stroke="#064e3b" stroke-width="1"/>
+                    <line x1="101" y1="75" x2="115" y2="75" stroke="#064e3b" stroke-width="1"/>
+                    <line x1="101" y1="80" x2="115" y2="80" stroke="#064e3b" stroke-width="1"/>
+                    <line x1="101" y1="85" x2="115" y2="85" stroke="#064e3b" stroke-width="1"/>
+                    <line x1="101" y1="90" x2="115" y2="90" stroke="#064e3b" stroke-width="1"/>
+                    <line x1="101" y1="95" x2="115" y2="95" stroke="#064e3b" stroke-width="1"/>
+                    <line x1="101" y1="100" x2="115" y2="100" stroke="#064e3b" stroke-width="1"/>
+
+                    <path d="M 50 110 L 50 70 A 10 10 0 0 1 70 70 L 70 110 Z" fill="#14532d"/>
+                    <path d="M 130 110 L 130 70 A 10 10 0 0 1 150 70 L 150 110 Z" fill="#14532d"/>
+                    <path d="M 48 70 A 12 12 0 0 1 72 70 L 72 110 L 48 110 Z" fill="none" stroke="#b91c1c" stroke-width="2"/>
+                    <path d="M 128 70 A 12 12 0 0 1 152 70 L 152 110 L 128 110 Z" fill="none" stroke="#b91c1c" stroke-width="2"/>
+                    
+                    <rect x="42" y="40" width="4" height="150" fill="#fef08a" stroke="#7f1d1d" stroke-width="0.5"/>
+                    <rect x="74" y="40" width="6" height="150" fill="#fef08a" stroke="#7f1d1d" stroke-width="0.5"/>
+                    <rect x="120" y="40" width="6" height="150" fill="#fef08a" stroke="#7f1d1d" stroke-width="0.5"/>
+                    <rect x="154" y="40" width="4" height="150" fill="#fef08a" stroke="#7f1d1d" stroke-width="0.5"/>
+                    
+                    <rect x="40" y="40" width="8" height="5" fill="#b91c1c"/>
+                    <rect x="72" y="40" width="10" height="5" fill="#b91c1c"/>
+                    <rect x="118" y="40" width="10" height="5" fill="#b91c1c"/>
+                    <rect x="152" y="40" width="8" height="5" fill="#b91c1c"/>
+                    
+                    <rect x="40" y="185" width="8" height="5" fill="#b91c1c"/>
+                    <rect x="72" y="185" width="10" height="5" fill="#b91c1c"/>
+                    <rect x="118" y="185" width="10" height="5" fill="#b91c1c"/>
+                    <rect x="152" y="185" width="8" height="5" fill="#b91c1c"/>
+
                 </svg>
             </div>
-            <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left reveal-left glass-card">
+            <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left reveal-right glass-card">
                 <div class="glass-content">
                     <p class="script-font text-5xl md:text-7xl text-red-600 mb-6">Kolkata Diaries</p>
                     <div class="space-y-6 text-xl md:text-2xl font-light text-red-900/80 leading-relaxed">
@@ -405,23 +518,97 @@
     </section>
 
     <section id="section-6" class="relative z-10 w-full min-h-screen flex items-center justify-center py-24 px-6">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between w-full gap-12">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row-reverse items-center justify-between w-full gap-12">
             <div class="w-full md:w-1/2 flex justify-center parallax" data-speed="0.04">
-                <svg class="w-64 h-64 md:w-96 md:h-96 reveal-scale drop-shadow-xl" viewBox="0 0 200 200">
-                    <ellipse cx="100" cy="150" rx="40" ry="30" fill="#b91c1c"/>
-                    <ellipse cx="100" cy="140" rx="35" ry="20" fill="#fdfbf7"/>
-                    <line x1="85" y1="40" x2="85" y2="140" stroke="#7f1d1d" stroke-width="4"/>
-                    <line x1="115" y1="40" x2="115" y2="140" stroke="#7f1d1d" stroke-width="4"/>
-                    <path d="M 85 40 C 100 20 100 20 115 40" fill="none" stroke="#7f1d1d" stroke-width="4"/>
-                    <line x1="100" y1="30" x2="100" y2="150" stroke="#333" stroke-width="1.5"/>
-                    <rect x="95" y="25" width="10" height="15" fill="#7f1d1d"/>
-                    <path d="M 140 80 Q 150 60 160 80 Q 170 100 160 120" fill="none" stroke="#dc2626" stroke-width="2"/>
-                    <circle cx="160" cy="120" r="4" fill="#dc2626"/>
-                    <path d="M 40 100 Q 50 80 60 100 Q 70 120 60 140" fill="none" stroke="#dc2626" stroke-width="2"/>
-                    <circle cx="60" cy="140" r="4" fill="#dc2626"/>
+                <svg class="w-64 h-64 md:w-96 md:h-96 reveal-scale drop-shadow-2xl" viewBox="0 0 200 200">
+                    <defs>
+                        <radialGradient id="sitarGourd" cx="40%" cy="40%" r="60%">
+                            <stop offset="0%" stop-color="#f59e0b"/>
+                            <stop offset="50%" stop-color="#b45309"/>
+                            <stop offset="100%" stop-color="#451a03"/>
+                        </radialGradient>
+                        <linearGradient id="sitarNeck" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stop-color="#78350f"/>
+                            <stop offset="30%" stop-color="#d97706"/>
+                            <stop offset="70%" stop-color="#b45309"/>
+                            <stop offset="100%" stop-color="#451a03"/>
+                        </linearGradient>
+                        <linearGradient id="bone" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#fdfbf7"/>
+                            <stop offset="100%" stop-color="#d6d3d1"/>
+                        </linearGradient>
+                    </defs>
+
+                    <g transform="translate(30, 40) rotate(-15)">
+                        <path d="M 10 20 L 10 5 A 5 5 0 0 1 15 0 L 25 2 L 25 17 M 10 10 L 25 12" fill="none" stroke="#dc2626" stroke-width="2"/>
+                        <circle cx="8" cy="20" r="4" fill="#dc2626"/>
+                        <circle cx="23" cy="17" r="4" fill="#dc2626"/>
+                    </g>
+                    <g transform="translate(140, 130) rotate(15)">
+                        <path d="M 10 15 L 10 0 A 3 3 0 0 1 13 -3 L 18 -2 L 18 12 M 10 5 L 18 7" fill="none" stroke="#f87171" stroke-width="1.5"/>
+                        <circle cx="8" cy="15" r="3" fill="#f87171"/>
+                        <circle cx="16" cy="12" r="3" fill="#f87171"/>
+                    </g>
+                    <g transform="translate(160, 40) rotate(25)">
+                        <path d="M 10 15 L 10 0 A 5 5 0 0 1 15 3" fill="none" stroke="#ef4444" stroke-width="1.5"/>
+                        <circle cx="8" cy="15" r="3" fill="#ef4444"/>
+                    </g>
+
+                    <g transform="rotate(45 100 100) translate(0, -10)">
+                        <circle cx="85" cy="25" r="22" fill="url(#sitarGourd)"/>
+                        <path d="M 65 25 Q 85 5 105 25" fill="none" stroke="#fcd34d" stroke-width="1.5" opacity="0.6"/>
+
+                        <rect x="90" y="20" width="20" height="110" fill="url(#sitarNeck)"/>
+                        
+                        <path d="M 90 20 L 90 -5 Q 100 -15 110 -5 L 110 20 Z" fill="url(#sitarNeck)"/>
+                        
+                        <path d="M 100 120 C 140 120, 160 160, 140 190 C 125 210, 75 210, 60 190 C 40 160, 60 120, 100 120 Z" fill="url(#sitarGourd)"/>
+                        
+                        <path d="M 100 125 C 130 125, 145 155, 130 180 C 115 200, 85 200, 70 180 C 55 155, 70 125, 100 125 Z" fill="url(#sitarNeck)"/>
+                        <path d="M 100 125 C 130 125, 145 155, 130 180 C 115 200, 85 200, 70 180 C 55 155, 70 125, 100 125 Z" fill="none" stroke="#fcd34d" stroke-width="1.5" stroke-dasharray="3 3"/>
+
+                        <path d="M 75 150 Q 100 160 125 150" fill="none" stroke="#fcd34d" stroke-width="1" opacity="0.8"/>
+                        <path d="M 80 170 Q 100 180 120 170" fill="none" stroke="#fcd34d" stroke-width="1" opacity="0.8"/>
+                        
+                        <path d="M 88 165 L 112 165 L 116 172 L 84 172 Z" fill="url(#bone)"/>
+                        <path d="M 92 174 L 108 174 L 110 177 L 90 177 Z" fill="#451a03"/>
+                        
+                        <path d="M 95 190 L 105 190 L 102 205 L 98 205 Z" fill="#292524"/>
+
+                        <path d="M 90 30 Q 100 35 110 30" fill="none" stroke="#fcd34d" stroke-width="2"/>
+                        <path d="M 90 45 Q 100 50 110 45" fill="none" stroke="#fcd34d" stroke-width="2"/>
+                        <path d="M 90 60 Q 100 65 110 60" fill="none" stroke="#fcd34d" stroke-width="2"/>
+                        <path d="M 90 75 Q 100 80 110 75" fill="none" stroke="#fcd34d" stroke-width="2"/>
+                        <path d="M 90 90 Q 100 95 110 90" fill="none" stroke="#fcd34d" stroke-width="2"/>
+                        <path d="M 90 105 Q 100 110 110 105" fill="none" stroke="#fcd34d" stroke-width="2"/>
+
+                        <circle cx="85" cy="0" r="3.5" fill="#292524"/>
+                        <rect x="73" y="-1.5" width="12" height="3" fill="#292524" rx="1"/>
+                        
+                        <circle cx="115" cy="15" r="3.5" fill="#292524"/>
+                        <rect x="115" y="13.5" width="12" height="3" fill="#292524" rx="1"/>
+                        
+                        <circle cx="85" cy="30" r="3.5" fill="#292524"/>
+                        <rect x="73" y="28.5" width="12" height="3" fill="#292524" rx="1"/>
+
+                        <circle cx="113" cy="45" r="2.5" fill="#292524"/>
+                        <rect x="113" y="44" width="8" height="2" fill="#292524" rx="0.5"/>
+                        <circle cx="113" cy="65" r="2.5" fill="#292524"/>
+                        <rect x="113" y="64" width="8" height="2" fill="#292524" rx="0.5"/>
+                        <circle cx="113" cy="85" r="2.5" fill="#292524"/>
+                        <rect x="113" y="84" width="8" height="2" fill="#292524" rx="0.5"/>
+                        <circle cx="113" cy="105" r="2.5" fill="#292524"/>
+                        <rect x="113" y="104" width="8" height="2" fill="#292524" rx="0.5"/>
+
+                        <line x1="94" y1="-5" x2="94" y2="190" stroke="#fef3c7" stroke-width="1" opacity="0.9"/>
+                        <line x1="97" y1="-5" x2="97" y2="190" stroke="#fef3c7" stroke-width="0.75" opacity="0.9"/>
+                        <line x1="100" y1="-5" x2="100" y2="190" stroke="#fef3c7" stroke-width="0.75" opacity="0.9"/>
+                        <line x1="103" y1="-5" x2="103" y2="190" stroke="#fef3c7" stroke-width="0.5" opacity="0.6"/>
+                        <line x1="106" y1="-5" x2="106" y2="190" stroke="#fef3c7" stroke-width="0.5" opacity="0.6"/>
+                    </g>
                 </svg>
             </div>
-            <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left reveal-right glass-card">
+            <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left reveal-left glass-card">
                 <div class="glass-content">
                     <p class="script-font text-5xl md:text-7xl text-red-600 mb-6">The Perfect Melody</p>
                     <div class="space-y-6 text-xl md:text-2xl font-light text-red-900/80 leading-relaxed">
@@ -432,15 +619,178 @@
         </div>
     </section>
 
-    <!-- SECTION 7: Laxmi Puja Proposal -->
-    <section id="section-7" class="relative z-10 w-full min-h-screen flex items-center justify-center py-24 px-6">
+    <section id="section-poem" class="relative z-10 w-full min-h-screen flex items-center justify-center py-24 px-6">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between w-full gap-12">
+            <div class="w-full md:w-1/2 flex justify-center parallax" data-speed="-0.04">
+                <svg class="w-64 h-64 md:w-96 md:h-96 reveal-scale drop-shadow-2xl" viewBox="0 0 200 200">
+                    <defs>
+                        <linearGradient id="quillGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#fca5a5"/>
+                            <stop offset="50%" stop-color="#ef4444"/>
+                            <stop offset="100%" stop-color="#7f1d1d"/>
+                        </linearGradient>
+                        <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#fef08a" stop-opacity="0.6"/>
+                            <stop offset="100%" stop-color="#fef08a" stop-opacity="0"/>
+                        </radialGradient>
+                    </defs>
+                    
+                    <circle cx="100" cy="100" r="80" fill="url(#glow)"/>
+
+                    <path d="M 100 170 C 60 180, 20 160, 10 140 L 10 60 C 20 80, 60 100, 100 90 Z" fill="#b45309"/>
+                    <path d="M 100 170 C 140 180, 180 160, 190 140 L 190 60 C 180 80, 140 100, 100 90 Z" fill="#92400e"/>
+
+                    <path d="M 100 160 C 60 170, 25 150, 15 130 L 15 50 C 25 70, 60 90, 100 80 Z" fill="#fdfbf7"/>
+                    <path d="M 100 155 C 65 165, 30 145, 20 125 L 20 45 C 30 65, 65 85, 100 75 Z" fill="#ffffff"/>
+                    
+                    <path d="M 100 160 C 140 170, 175 150, 185 130 L 185 50 C 175 70, 140 90, 100 80 Z" fill="#f8fafc"/>
+                    <path d="M 100 155 C 135 165, 170 145, 180 125 L 180 45 C 170 65, 135 85, 100 75 Z" fill="#f1f5f9"/>
+
+                    <line x1="100" y1="75" x2="100" y2="160" stroke="#78350f" stroke-width="3" stroke-linecap="round"/>
+
+                    <line x1="35" y1="70" x2="85" y2="80" stroke="#7f1d1d" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+                    <line x1="30" y1="85" x2="90" y2="95" stroke="#7f1d1d" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+                    <line x1="30" y1="100" x2="80" y2="110" stroke="#7f1d1d" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+                    <line x1="25" y1="115" x2="85" y2="125" stroke="#7f1d1d" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+
+                    <line x1="110" y1="80" x2="165" y2="70" stroke="#7f1d1d" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+                    <line x1="110" y1="95" x2="155" y2="85" stroke="#7f1d1d" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+                    <line x1="110" y1="110" x2="135" y2="105" stroke="#7f1d1d" stroke-width="2" stroke-linecap="round"/> 
+
+                    <g style="animation: flicker 2s infinite alternate;">
+                        <path d="M 140 90 L 142 95 L 147 97 L 142 99 L 140 104 L 138 99 L 133 97 L 138 95 Z" fill="#fbbf24"/>
+                        <path d="M 160 50 L 161 54 L 165 55 L 161 56 L 160 60 L 159 56 L 155 55 L 159 54 Z" fill="#fbbf24"/>
+                        <circle cx="120" cy="60" r="1.5" fill="#fca5a5"/>
+                        <circle cx="150" cy="75" r="2" fill="#fca5a5"/>
+                    </g>
+
+                    <ellipse cx="165" cy="145" rx="14" ry="5" fill="#1c1917"/>
+                    <path d="M 153 145 C 153 160, 177 160, 177 145 Z" fill="#292524"/>
+                    <ellipse cx="165" cy="144" rx="10" ry="3" fill="#7f1d1d"/>
+
+                    <g transform="translate(135, 105) rotate(15)">
+                        <path d="M 0 0 L -15 -60 C -30 -80, 10 -100, 20 -70 C 25 -50, 10 -20, 0 0 Z" fill="url(#quillGrad)"/>
+                        <path d="M 0 0 L 5 -80" stroke="#450a0a" stroke-width="1.5" fill="none"/>
+                        <path d="M 0 0 L -2 -15 L 2 -15 Z" fill="#fef08a"/> 
+                    </g>
+                </svg>
+            </div>
+            <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left reveal-right glass-card">
+                <div class="glass-content">
+                    <p class="script-font text-5xl md:text-7xl text-red-600 mb-6">A Poetic Promise</p>
+                    <div class="space-y-6 text-xl md:text-2xl font-light text-red-900/80 leading-relaxed italic">
+                        <p>Amar porano jaha chai, tumi tai…<br>
+                        Nobo borsher alo te tomar hashi chai 🌸.<br>
+                       Tomar chokhe notun shopno, uthe roj alor moto,<br>
+                       Ei Boishakhe mon bhore tomar safollo chai ❤️</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="section-wishes" class="relative z-10 w-full min-h-screen flex flex-col items-center justify-center py-20 overflow-hidden">
+        <div class="max-w-7xl mx-auto w-full px-6 flex flex-col items-center z-10">
+            <div class="text-center mb-10 md:mb-16 reveal-up">
+                <p class="text-sm md:text-base uppercase tracking-widest text-red-600 font-semibold mb-3">For The New Year</p>
+                <h2 class="script-font text-6xl md:text-8xl text-red-700">My Heart's Wishes</h2>
+                <svg class="w-32 h-3 mx-auto mt-4 text-red-300" viewBox="0 0 100 10" preserveAspectRatio="none">
+                    <path d="M0,5 Q50,10 100,5" fill="none" stroke="currentColor" stroke-width="2" />
+                </svg>
+            </div>
+
+            <div class="hidden md:grid grid-cols-3 gap-8 w-full px-4">
+                <div class="glass-card flex flex-col items-center text-center p-8 reveal-up transform hover:-translate-y-4 transition-transform duration-500 hover:shadow-2xl hover:shadow-red-900/20">
+                    <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center text-red-600 mb-6 shadow-inner">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-red-800 mb-4">Unending Joy</h3>
+                    <p class="text-lg font-light text-red-900/80 leading-relaxed">May your beautiful smile never fade. I wish you a year filled with laughter, happiness, and moments that make your heart dance.</p>
+                </div>
+                
+                <div class="glass-card flex flex-col items-center text-center p-8 reveal-up translate-y-12 transform hover:translate-y-8 transition-transform duration-500 hover:shadow-2xl hover:shadow-red-900/20" style="transition-delay: 0.2s">
+                    <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center text-red-600 mb-6 shadow-inner">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-red-800 mb-4">Boundless Success</h3>
+                    <p class="text-lg font-light text-red-900/80 leading-relaxed">May all your dreams take flight this year. Whatever you aspire to achieve, I will always be right here cheering the loudest for you.</p>
+                </div>
+
+                <div class="glass-card flex flex-col items-center text-center p-8 reveal-up transform hover:-translate-y-4 transition-transform duration-500 hover:shadow-2xl hover:shadow-red-900/20" style="transition-delay: 0.4s">
+                    <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center text-red-600 mb-6 shadow-inner">
+                        <svg class="w-10 h-10 drop-shadow-md transform hover:scale-110 transition-transform duration-300" viewBox="0 0 100 100">
+                            <path d="M 50 82 C 20 82, 5 88, 5 92 C 5 96, 20 98, 50 98 C 80 98, 95 96, 95 92 C 95 88, 80 82, 50 82 Z" fill="#15803d" opacity="0.6"/>
+                            <path d="M50 85 C 30 80, 10 60, 20 40 C 30 30, 45 50, 50 85 Z" fill="#fca5a5" opacity="0.9"/>
+                            <path d="M50 85 C 70 80, 90 60, 80 40 C 70 30, 55 50, 50 85 Z" fill="#fca5a5" opacity="0.9"/>
+                            <path d="M50 85 C 25 85, 5 55, 15 35 C 30 20, 40 60, 50 85 Z" fill="#f87171"/>
+                            <path d="M50 85 C 75 85, 95 55, 85 35 C 70 20, 60 60, 50 85 Z" fill="#f87171"/>
+                            <path d="M50 85 C 35 60, 35 25, 50 5 C 65 25, 65 60, 50 85 Z" fill="#fca5a5"/>
+                            <path d="M50 85 C 25 80, 15 50, 30 35 C 40 30, 45 60, 50 85 Z" fill="#ef4444"/>
+                            <path d="M50 85 C 75 80, 85 50, 70 35 C 60 30, 55 60, 50 85 Z" fill="#ef4444"/>
+                            <path d="M50 85 C 40 65, 40 35, 50 15 C 60 35, 60 65, 50 85 Z" fill="#dc2626"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-red-800 mb-4">Endless Happiness</h3>
+                    <p class="text-lg font-light text-red-900/80 leading-relaxed">May you receive all the happiness this world has to offer. I pray that any bad time in your life is instantly replaced by the absolute best of my good times.</p>
+                </div>
+            </div>
+
+            <div class="block md:hidden w-full relative">
+                <div class="flex justify-center items-center gap-2 mb-4 text-red-600/60 text-sm italic reveal-up">
+                    <svg class="w-4 h-4 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    Swipe to read
+                    <svg class="w-4 h-4 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+
+                <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-12 pt-4 px-6 -mx-6 hide-scrollbar relative z-20">
+                    
+                    <div class="snap-center shrink-0 w-[85%] glass-card p-8 flex flex-col items-center text-center reveal-up">
+                        <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center text-red-600 mb-6 shadow-inner">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-red-800 mb-4">Unending Joy</h3>
+                        <p class="text-lg font-light text-red-900/80 leading-relaxed">May your beautiful smile never fade. I wish you a year filled with laughter, happiness, and moments that make your heart dance.</p>
+                    </div>
+
+                    <div class="snap-center shrink-0 w-[85%] glass-card p-8 flex flex-col items-center text-center reveal-up" style="transition-delay: 0.1s">
+                        <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center text-red-600 mb-6 shadow-inner">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-red-800 mb-4">Boundless Success</h3>
+                        <p class="text-lg font-light text-red-900/80 leading-relaxed">May all your dreams take flight this year. Whatever you aspire to achieve, I will always be right here cheering the loudest for you.</p>
+                    </div>
+
+                    <div class="snap-center shrink-0 w-[85%] glass-card p-8 flex flex-col items-center text-center reveal-up" style="transition-delay: 0.2s">
+                        <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center text-red-600 mb-6 shadow-inner">
+                            <svg class="w-10 h-10 drop-shadow-md transform hover:scale-110 transition-transform duration-300" viewBox="0 0 100 100">
+                                <path d="M 50 82 C 20 82, 5 88, 5 92 C 5 96, 20 98, 50 98 C 80 98, 95 96, 95 92 C 95 88, 80 82, 50 82 Z" fill="#15803d" opacity="0.6"/>
+                                <path d="M50 85 C 30 80, 10 60, 20 40 C 30 30, 45 50, 50 85 Z" fill="#fca5a5" opacity="0.9"/>
+                                <path d="M50 85 C 70 80, 90 60, 80 40 C 70 30, 55 50, 50 85 Z" fill="#fca5a5" opacity="0.9"/>
+                                <path d="M50 85 C 25 85, 5 55, 15 35 C 30 20, 40 60, 50 85 Z" fill="#f87171"/>
+                                <path d="M50 85 C 75 85, 95 55, 85 35 C 70 20, 60 60, 50 85 Z" fill="#f87171"/>
+                                <path d="M50 85 C 35 60, 35 25, 50 5 C 65 25, 65 60, 50 85 Z" fill="#fca5a5"/>
+                                <path d="M50 85 C 25 80, 15 50, 30 35 C 40 30, 45 60, 50 85 Z" fill="#ef4444"/>
+                                <path d="M50 85 C 75 80, 85 50, 70 35 C 60 30, 55 60, 50 85 Z" fill="#ef4444"/>
+                                <path d="M50 85 C 40 65, 40 35, 50 15 C 60 35, 60 65, 50 85 Z" fill="#dc2626"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-red-800 mb-4">Endless Happiness</h3>
+                        <p class="text-lg font-light text-red-900/80 leading-relaxed">May you receive all the happiness this world has to offer. I pray that any bad time in your life is instantly replaced by the absolute best of my good times.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="section-7" class="relative z-10 w-full min-h-screen flex items-center justify-center py-24 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row-reverse items-center justify-between w-full gap-12">
             
             <div class="w-full md:w-1/2 flex justify-center relative parallax" data-speed="0.05">
                 <div class="absolute inset-0 bg-yellow-400 blur-[80px] opacity-30 rounded-full scale-110 pointer-events-none"></div>
                 
                 <div class="relative w-64 h-80 md:w-80 md:h-[450px] rounded-t-full rounded-b-lg border-[10px] border-yellow-500/20 shadow-[0_20px_50px_rgba(202,138,4,0.3)] overflow-hidden transform hover:scale-105 transition-transform duration-700 z-10 reveal-scale">
-                    <img src="https://images.unsplash.com/photo-1605806616949-1e87b487cb2a?auto=format&fit=crop&w=800&q=80" alt="Laxmi" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x800/ca8a04/fdfbf7?text=Add+Her+Photo+Here'">
+                    <img src="Model.jpg" alt="Laxmi" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x800/ca8a04/fdfbf7?text=Add+Her+Photo+Here'">
                 </div>
 
                 <div class="absolute -bottom-16 md:-bottom-24 z-30 reveal-up pointer-events-none" style="perspective: 1000px;">
@@ -518,7 +868,7 @@
                 </div>
             </div>
 
-            <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left reveal-right glass-card">
+            <div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left reveal-left glass-card">
                 <div class="glass-content">
                     <h2 class="text-4xl md:text-6xl font-bold mb-6 text-red-800">Auspicious Beginnings</h2>
                     <p class="text-xl md:text-2xl font-light text-red-900/90 leading-relaxed mb-8">
@@ -527,14 +877,14 @@
                     <p class="text-2xl md:text-3xl font-semibold text-red-800 mb-6">
                         As we welcome 1433 together...
                     </p>
-                    <span class="script-font text-6xl md:text-8xl text-red-600 block mb-12 drop-shadow-md">Will you be mine?</span>
+                    <span class="script-font text-5xl md:text-7xl text-red-600 block mb-12 drop-shadow-md leading-tight">Will you be my Ashtami <br> pandal-hopping partner?</span>
 
                     <div class="flex flex-col md:flex-row gap-6 items-center">
                         <button onclick="triggerProposalSuccess()" class="px-10 py-4 bg-red-700 text-white rounded-full text-xl font-semibold hover:bg-red-800 transition-colors shadow-xl hover:scale-105 transition-transform cursor-none border border-red-600 custom-btn">
-                            Yes, absolutely!
+                            Jata
                         </button>
                         <button onclick="triggerProposalSuccess()" class="px-10 py-4 border-2 border-red-700 text-red-700 bg-white/50 backdrop-blur-md rounded-full text-xl font-semibold hover:bg-red-50 transition-colors shadow-lg hover:scale-105 transition-transform cursor-none custom-btn">
-                            Always Yes!
+                            Kuch Bhi
                         </button>
                     </div>
                 </div>
@@ -542,10 +892,18 @@
         </div>
     </section>
 
+    <footer class="relative z-10 w-full py-12 text-center">
+        <div class="flex items-center justify-center gap-4">
+            <div class="h-px w-12 bg-red-800/20"></div>
+            <p class="text-sm md:text-base text-red-800/60 uppercase tracking-[0.3em] font-semibold">254 Days left</p>
+            <div class="h-px w-12 bg-red-800/20"></div>
+        </div>
+    </footer>
+
     <div id="proposal-modal" class="fixed inset-0 bg-red-900/95 z-[99999] flex flex-col items-center justify-center hidden opacity-0 transition-opacity duration-1000 backdrop-blur-xl pointer-events-none">
         <div class="text-center transform scale-90 transition-transform duration-1000" id="modal-content">
-            <h1 class="script-font text-6xl md:text-9xl text-white drop-shadow-2xl mb-6">You made my life perfect!</h1>
-            <p class="text-2xl md:text-4xl text-red-200 font-light tracking-wide">Shubho Noboborsho, My Love ❤️</p>
+            <h1 class="script-font text-6xl md:text-9xl text-white drop-shadow-2xl mb-6">You can text me</h1>
+            <p class="text-2xl md:text-4xl text-red-200 font-light tracking-wide">Shubho Noboborsho, My Queen ❤️</p>
             <button onclick="closeModal()" class="mt-16 text-white/70 hover:text-white underline tracking-widest uppercase transition-colors pointer-events-auto custom-btn cursor-none">
                 Replay Journey
             </button>
@@ -556,6 +914,54 @@
         const petalContainer = document.getElementById('petal-container');
         const cursor = document.getElementById('custom-cursor');
         const trail = document.getElementById('cursor-trail');
+
+        const bgMusic = document.getElementById('bg-music');
+        const musicToggle = document.getElementById('music-toggle');
+        const iconOn = document.getElementById('music-icon-on');
+        const iconOff = document.getElementById('music-icon-off');
+        let isMusicPlaying = false;
+
+        function toggleMusic() {
+            if (isMusicPlaying) {
+                bgMusic.pause();
+                iconOn.classList.add('hidden');
+                iconOff.classList.remove('hidden');
+            } else {
+                bgMusic.play().catch(e => console.log("Audio play failed:", e));
+                iconOff.classList.add('hidden');
+                iconOn.classList.remove('hidden');
+            }
+            isMusicPlaying = !isMusicPlaying;
+        }
+
+        musicToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMusic();
+        });
+
+        const startAudioOnce = () => {
+            if (!isMusicPlaying) {
+                toggleMusic();
+            }
+            document.removeEventListener('click', startAudioOnce);
+            document.removeEventListener('touchstart', startAudioOnce);
+        };
+
+        document.addEventListener('click', startAudioOnce);
+        document.addEventListener('touchstart', startAudioOnce);
+
+        window.addEventListener('load', () => {
+            const playPromise = bgMusic.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    isMusicPlaying = true;
+                    iconOff.classList.add('hidden');
+                    iconOn.classList.remove('hidden');
+                }).catch(error => {
+                    console.log("Autoplay blocked by browser. User interaction required.");
+                });
+            }
+        });
 
         let mouseX = window.innerWidth / 2;
         let mouseY = window.innerHeight / 2;
@@ -602,7 +1008,7 @@
         });
 
         document.addEventListener('click', (e) => {
-            if(!e.target.closest('button') && !e.target.closest('a')) {
+            if(!e.target.closest('button') && !e.target.closest('a') && !e.target.closest('.hide-scrollbar')) {
                 createBurst(e.clientX, e.clientY);
             }
             
