@@ -611,7 +611,7 @@
                 <div class="glass-content">
                     <p class="script-font text-5xl md:text-7xl text-red-600 mb-6">The Perfect Melody</p>
                     <div class="space-y-6 text-xl md:text-2xl font-light text-red-900/80 leading-relaxed">
-                        <p>Like the most beautiful melody in the universe, a timeless Rabindra Sangeet drifting through a gentle spring breeze, your presence feels rare, pure, and endlessly enchanting.</p>                    </div>
+                        <p>Like the most beautiful melody in the universe, a timeless Rabindra Sangeet drifting through a gentle spring breeze, your presence feels rare, pure, and endlessly enchanting.</p>                   </div>
                 </div>
             </div>
         </div>
@@ -737,7 +737,7 @@
                 <div class="flex justify-center items-center gap-2 mb-4 text-red-600/60 text-sm italic reveal-up">
                     <svg class="w-4 h-4 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                     Swipe to read
-                    <svg class="w-4 h-4 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    <svg class="w-4 h-4 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7-7m7-7H3"></path></svg>
                 </div>
 
                 <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-12 pt-4 px-6 -mx-6 hide-scrollbar relative z-20">
@@ -899,11 +899,30 @@
         </div>
     </footer>
 
-    <div id="proposal-modal" class="fixed inset-0 bg-red-900/95 z-[99999] flex flex-col items-center justify-center hidden opacity-0 transition-opacity duration-1000 backdrop-blur-xl pointer-events-none">
-        <div class="text-center transform scale-90 transition-transform duration-1000" id="modal-content">
-            <h1 class="script-font text-6xl md:text-9xl text-white drop-shadow-2xl mb-6">You can text me</h1>
-            <p class="text-2xl md:text-4xl text-red-200 font-light tracking-wide">Shubho Noboborsho, My Queen ❤️</p>
-            <button onclick="closeModal()" class="mt-16 text-white/70 hover:text-white underline tracking-widest uppercase transition-colors pointer-events-auto custom-btn cursor-none">
+    <div id="proposal-modal" class="fixed inset-0 bg-red-950/95 z-[99999] flex flex-col items-center justify-center hidden opacity-0 transition-opacity duration-1000 backdrop-blur-xl pointer-events-none overflow-y-auto py-10 px-4">
+        <div class="text-center transform scale-90 transition-transform duration-1000 max-w-2xl w-full flex flex-col items-center justify-center min-h-full" id="modal-content">
+            <h1 class="script-font text-6xl md:text-8xl text-white drop-shadow-2xl mb-4 mt-8">You can text me</h1>
+            <p class="text-2xl md:text-3xl text-red-200 font-light tracking-wide mb-10">Shubho Noboborsho, My Queen ❤️</p>
+            
+            <div class="w-full bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-6 md:p-10 mb-10 shadow-2xl pointer-events-auto text-left">
+                <h2 class="script-font text-4xl md:text-5xl text-white mb-6 text-center">Send a Wish</h2>
+                <form id="wishForm" class="flex flex-col gap-5">
+                    <div>
+                        <label for="wishMessage" class="block text-red-100 font-semibold mb-2">Your Wish</label>
+                        <textarea id="wishMessage" name="Wish" required rows="3" class="w-full px-5 py-4 rounded-xl bg-white/20 border border-red-300/30 focus:outline-none focus:ring-2 focus:ring-red-400 text-white placeholder-red-200/70 transition-all cursor-none resize-none" placeholder="Write your beautiful wish here..."></textarea>
+                    </div>
+                    <input type="hidden" name="_subject" value="New Noboborsho Wish!">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    <button type="submit" id="submitWishBtn" class="mt-2 px-8 py-4 bg-red-600 text-white rounded-full text-xl font-semibold hover:bg-red-500 transition-colors shadow-xl hover:scale-105 transition-transform cursor-none border border-red-400 custom-btn w-full flex items-center justify-center gap-3">
+                        <span>Send Your Wish</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                    </button>
+                    <p id="wishFormMessage" class="text-center font-semibold mt-2 hidden text-lg transition-opacity duration-300"></p>
+                </form>
+            </div>
+
+            <button onclick="closeModal()" class="text-white/70 hover:text-white underline tracking-widest uppercase transition-colors pointer-events-auto custom-btn cursor-none pb-10">
                 Replay Journey
             </button>
         </div>
@@ -993,7 +1012,7 @@
         }
         animateTrail();
 
-        document.querySelectorAll('a, button, .custom-btn').forEach(btn => {
+        document.querySelectorAll('a, button, .custom-btn, input, textarea').forEach(btn => {
             btn.addEventListener('mouseenter', () => {
                 cursor.style.transform = 'translate(-50%, -50%) scale(2)';
                 cursor.style.backgroundColor = '#fca5a5';
@@ -1007,7 +1026,7 @@
         });
 
         document.addEventListener('click', (e) => {
-            if(!e.target.closest('button') && !e.target.closest('a') && !e.target.closest('.hide-scrollbar')) {
+            if(!e.target.closest('button') && !e.target.closest('a') && !e.target.closest('input') && !e.target.closest('textarea') && !e.target.closest('.hide-scrollbar')) {
                 createBurst(e.clientX, e.clientY);
             }
             
@@ -1103,6 +1122,54 @@
                 window.scrollTo(0,0);
             }, 1000);
         }
+
+        const wishForm = document.getElementById('wishForm');
+        const submitWishBtn = document.getElementById('submitWishBtn');
+        const wishFormMessage = document.getElementById('wishFormMessage');
+
+        wishForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const originalBtnContent = submitWishBtn.innerHTML;
+            submitWishBtn.innerHTML = '<span class="animate-pulse">Sending with love...</span>';
+            submitWishBtn.disabled = true;
+
+            const formData = new FormData(wishForm);
+            const data = Object.fromEntries(formData.entries());
+
+            fetch("https://formsubmit.co/ajax/banerjeeshubham00@gmail.com", {
+                method: "POST",
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    _subject: "New Noboborsho Wish Received!",
+                    Wish: data.Wish,
+                    _captcha: "false"
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                wishFormMessage.textContent = "Your wish has been preserve succesfully";
+                wishFormMessage.className = "text-center font-semibold mt-4 text-green-400 block transition-opacity";
+                wishForm.reset();
+                createBurst(window.innerWidth / 2, window.innerHeight / 2, 30);
+
+                setTimeout(() => {
+                    wishFormMessage.classList.add('hidden');
+                }, 5000);
+            })
+            .catch(error => {
+                wishFormMessage.textContent = "Oops! Something went wrong. Try again!";
+                wishFormMessage.className = "text-center font-semibold mt-4 text-red-400 block transition-opacity";
+                console.error("Form error:", error);
+            })
+            .finally(() => {
+                submitWishBtn.innerHTML = originalBtnContent;
+                submitWishBtn.disabled = false;
+            });
+        });
 
         setInterval(() => {
             if(Math.random() > 0.4) createParticle(0, 0, false, 'petal');
