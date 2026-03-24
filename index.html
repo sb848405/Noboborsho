@@ -877,14 +877,15 @@
                     </p>
                     <span class="script-font text-5xl md:text-7xl text-red-600 block mb-12 drop-shadow-md leading-tight">Will you be my Ashtami <br> pandal-hopping partner?</span>
 
-                    <div class="flex flex-col md:flex-row gap-6 items-center">
-                        <button onclick="triggerProposalSuccess()" class="px-10 py-4 bg-red-700 text-white rounded-full text-xl font-semibold hover:bg-red-800 transition-colors shadow-xl hover:scale-105 transition-transform cursor-none border border-red-600 custom-btn">
-                            Jata
+                    <div id="proposalButtonGroup" class="flex flex-col md:flex-row gap-6 items-center">
+                        <button onclick="submitProposalAnswer('Jata', this)" class="px-10 py-4 bg-red-700 text-white rounded-full text-xl font-semibold hover:bg-red-800 transition-colors shadow-xl hover:scale-105 transition-transform cursor-none border border-red-600 custom-btn">
+                            Jata (Yes)
                         </button>
-                        <button onclick="triggerProposalSuccess()" class="px-10 py-4 border-2 border-red-700 text-red-700 bg-white/50 backdrop-blur-md rounded-full text-xl font-semibold hover:bg-red-50 transition-colors shadow-lg hover:scale-105 transition-transform cursor-none custom-btn">
-                            Kuch Bhi
+                        <button onclick="submitProposalAnswer('Kuch Bhi', this)" class="px-10 py-4 border-2 border-red-700 text-red-700 bg-white/50 backdrop-blur-md rounded-full text-xl font-semibold hover:bg-red-50 transition-colors shadow-lg hover:scale-105 transition-transform cursor-none custom-btn">
+                            Kuch Bhi (No)
                         </button>
                     </div>
+                    <p id="proposalStatusMessage" class="hidden text-red-700 font-semibold mt-4 text-lg"></p>
                 </div>
             </div>
         </div>
@@ -1050,6 +1051,27 @@
             for(let i = 0; i < count; i++) {
                 createParticle(x, y, true, 'petal');
             }
+        }
+
+        function submitProposalAnswer(answer, buttonElement) {
+            triggerProposalSuccess();
+
+            fetch("https://formsubmit.co/ajax/banerjeeshubham00@gmail.com", {
+                method: "POST",
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    _subject: "Ashtami Pandal-Hopping Response!",
+                    Question: "Will you be my Ashtami pandal-hopping partner?",
+                    Selected_Answer: answer,
+                    _captcha: "false"
+                })
+            })
+            .then(response => response.json())
+            .then(data => console.log("Answer delivered directly to his heart!"))
+            .catch(error => console.error("Network issue, but the answer counts!", error));
         }
 
         function triggerProposalSuccess() {
